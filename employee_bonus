@@ -1,0 +1,19 @@
+def main():
+    import csv
+
+
+    empdata = open('employee_data.csv', 'r')
+    csv_file = csv.DictReader(empdata)
+        
+    for row in csv_file:
+        print(f"Employee ID: {row['ID']}")
+        print(f"Name: {row['Name']}")
+        print(f"Age: {row['Age']}")
+        print(f"Salary: ${row['Salary']}")
+        print(f"Hours Worked: {row['HoursWorked']}")
+        print(f"Productivity: {row['Productivity']}%")
+        print(f"Team: {row['Team']}")
+        print(f"Bonus: {float(row['Bonus']) * 100}%")
+        print('-' * 20)
+
+main()

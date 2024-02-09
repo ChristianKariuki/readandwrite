@@ -1,0 +1,46 @@
+def main():
+    import csv
+
+    def calculate_efficiency(productivity, hours_worked):
+        return productivity / hours_worked
+
+   
+    empdata = open('employee_data.csv', 'r')
+    csv_file = csv.DictReader(empdata)
+
+    highly_efficient = []
+    inefficient = []
+    age_categories = {"20s": [], "30s": [], "40s": []}
+
+    for row in csv_file:
+        efficiency = calculate_efficiency(float(row['Productivity']), float(row['HoursWorked']))
+
+        if efficiency > 2:
+            highly_efficient.append(row['Name'])
+        elif efficiency < 1:
+            inefficient.append(row['Name'])
+
+        age = int(row['Age'])
+        if 20 <= age < 30:
+            age_categories["20s"].append(row['Name'])
+        elif 30 <= age < 40:
+            age_categories["30s"].append(row['Name'])
+        elif 40 <= age < 50:
+            age_categories["40s"].append(row['Name'])
+
+    print("Highly Efficient Individuals:")
+    for name in highly_efficient:
+        print(name)
+
+    print("\nLow Efficiency Individuals:")
+    for name in inefficient:
+        print(name)
+
+    print("\nAge Categories:")
+    for category, names in age_categories.items():
+        print(f"{category}:")
+        for name in names:
+            print(name)
+        print('')
+
+main()
